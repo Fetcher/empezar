@@ -55,7 +55,7 @@ describe Empezar::Runner do
         File.stub :exist? => true
         config_stub = stub 'config'
         SymbolMatrix.should_receive(:new).with('config/main.yaml').and_return config_stub
-        Empezar::Configuration.instance.should_receive(:merge).with(config_stub)
+        Empezar::Configuration.instance.should_receive(:merge!).with(config_stub)
 
         Empezar::Runner.start_configuration 'config/main.yaml'
       end

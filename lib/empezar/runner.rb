@@ -9,7 +9,7 @@ module Empezar
       unless File.exist? argument
         raise ConfigurationFileMissingException, "The configuration file is missing from '#{argument}'"
       end
-      Empezar::Configuration.instance.merge SymbolMatrix.new argument
+      Empezar::Configuration.instance.merge! SymbolMatrix.new argument
     end
 
     def self.start_logger
