@@ -27,7 +27,7 @@ Runner.run        # Maps config/main.yaml to Configuration as SymbolMatrix
 Log.info "This will be logged and written in the shell"
 
 Configuration.each do |key, value|
-  Log.debug key, value
+  Log.debug "#{key}: #{value}"
 end
 ```
 
