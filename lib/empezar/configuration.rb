@@ -6,8 +6,8 @@ end
 
 class Configuration
   class << self
-    def method_missing *args
-      Empezar::Configuration.instance.send *args
+    def method_missing *args, &block
+      Empezar::Configuration.instance.send *args, &block
     end
   end
 end
