@@ -3,11 +3,11 @@ module Empezar
     include Singleton
 
     def self.instance
-      @logger
+      @@logger
     end
 
     def self.start logger
-      @logger = logger
+      @@logger = logger
     end
   end
 end

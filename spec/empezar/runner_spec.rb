@@ -26,23 +26,51 @@ describe Empezar::Runner do
   end
 
   describe '.start_logger' do 
-    it 'should initialize the log as logger pointing to log/main.log, daily' do 
-      Dir.should_receive(:exist?).with('log').and_return true
-      demo_logger = stub 'logger'
-      Logger.should_receive(:new).with('log/main.log', 'daily').and_return demo_logger
-      Empezar::Log.should_receive(:start).with demo_logger
+    before do 
+      @demo_logger = stub 'demo logger'
+      Logger.should_receive(:new).with('log/main.log', 'daily').and_return @demo_logger
+    end
 
-      Empezar::Runner.start_logger
+    context 'normal conditions of pressure and temperature' do 
+      it 'should initialize the log as logger pointing to log/main.log, daily with the EchoingFormatter' do 
+        formatter = stub 'formatter'
+        echoing_formatter = stub 'echoing formatter'
+
+        Dir.should_receive(:exist?).with('log').and_return true
+        Empezar::Configuration.instance.should_receive(:has_key?).with(:verbosity).and_return false
+
+        Logger::Formatter.should_receive(:new).and_return formatter
+        Empezar::EchoingFormatter.should_receive(:new).with(formatter).and_return echoing_formatter
+        @demo_logger.should_receive(:formatter=).with echoing_formatter
+
+        Empezar::Log.should_receive(:start).with @demo_logger
+        Empezar::Log.should_receive(:instance).and_return @demo_logger
+
+        Empezar::Runner.start_logger
+      end
+    end
+
+    context 'the verbosity level is set to silent' do 
+      it 'should not set the formatter as an echoing formatter' do 
+        Empezar::EchoingFormatter.should_not_receive :new
+
+        Empezar::Configuration.instance.should_receive(:has_key?).with(:verbosity).and_return true
+        Empezar::Configuration.instance.should_receive(:verbosity).and_return 'silent'
+
+        Empezar::Log.should_receive(:start).with @demo_logger
+
+        Empezar::Runner.start_logger        
+      end
     end
 
     context 'the dir log does not exist' do
       it 'should create the dir log' do 
+        Empezar::Configuration.instance.should_receive(:has_key?).with(:verbosity).and_return true
+        Empezar::Configuration.instance.should_receive(:verbosity).and_return 'silent'
         Dir.should_receive(:exist?).with('log').and_return false
         Dir.should_receive(:mkdir).with('log')
 
-        demo_logger = stub 'logger'
-        Logger.should_receive(:new).with('log/main.log', 'daily').and_return demo_logger
-        Empezar::Log.should_receive(:start).with demo_logger
+        Empezar::Log.should_receive(:start).with @demo_logger
 
         Empezar::Runner.start_logger
       end

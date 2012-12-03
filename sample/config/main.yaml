@@ -1,0 +1,2 @@
+#config/main.yaml
+verbosity: normal # `silent` will silence stdout
