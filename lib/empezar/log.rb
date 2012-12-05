@@ -1,6 +1,7 @@
 module Empezar
   class Log
     include Singleton
+    @@logger = nil
 
     def self.instance
       @@logger
