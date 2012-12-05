@@ -16,7 +16,12 @@ end
 class Log
   class << self
     def method_missing *args
-      Empezar::Log.instance.send *args
+      if args.first == :warning
+        args.shift
+        Empezar::Log.instance.warn *args
+      else
+        Empezar::Log.instance.send *args
+      end
     end
   end
 end
