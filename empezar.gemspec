@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://github.com/Fetcher/empezar"
 
   gem.add_dependency 'symbolmatrix'
+  gem.add_dependency 'discoverer'
   gem.add_dependency 'term-ansicolor'
 
   gem.add_development_dependency 'rspec'
