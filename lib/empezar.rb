@@ -11,3 +11,5 @@ require 'empezar/configuration'
 require 'empezar/runner'
 require 'empezar/echoing_formatter'
 require 'empezar/log'
+
+require 'writer/symbolmatrix'
