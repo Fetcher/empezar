@@ -35,4 +35,4 @@ Scenario: App with some arguments
   And I should have 'more' with value 34 in Configuration
   And I should have 8080 in 'port' in 'client'
   And I should have "localhost" in 'host' in 'client'
-  And I should have "localhost" in 'path' in 'client'
+  And I should have "/" in 'path' in 'client'

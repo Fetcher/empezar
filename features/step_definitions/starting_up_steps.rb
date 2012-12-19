@@ -31,3 +31,13 @@ end
 Given /^the command line arguments$/ do |argument_line|
   @arguments = argument_line.split " "
 end
+
+Then /^I should have (\d+) in '(.+?)' in '(.+?)'$/ do |value, subkey, key|
+  Configuration.send(key.to_sym).send(subkey.to_sym)
+    .should == value.to_i
+end
+
+Then /^I should have "(.+?)" in '(.+?)' in '(.+?)'$/ do |value, subkey, key|
+  Configuration.send(key.to_sym).send(subkey.to_sym)
+    .should == value
+end
