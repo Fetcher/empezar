@@ -10,7 +10,8 @@ module Empezar
         raise ConfigurationFileMissingException, "The configuration file is missing from '#{config_file}'"
       end
       Empezar::Configuration.instance.merge! SymbolMatrix.new config_file
-      Empezar::Configuration.instance.recursive_merge! SymbolMatrix.new arguments.join " "
+      Empezar::Configuration.instance
+        .recursive_merge! SymbolMatrix.new(arguments.join(" ")), true
     end
 
     def self.start_logger log_file, stdout

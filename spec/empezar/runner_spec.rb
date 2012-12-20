@@ -135,7 +135,7 @@ describe Empezar::Runner do
         SymbolMatrix.should_receive(:new).with(@joined_args)
           .and_return @extra_data
         Empezar::Configuration.instance.should_receive(:recursive_merge!)
-          .with @extra_data
+          .with @extra_data, true
 
         Empezar::Runner
           .start_configuration 'config/main.yaml', @arguments
