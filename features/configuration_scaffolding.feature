@@ -14,5 +14,5 @@ Scenario: Creating a simple configuration file from a command
     many: values
     see:
       it: work
-  i: 1137
+  i: 1337
   """
