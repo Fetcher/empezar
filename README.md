@@ -19,10 +19,12 @@ Then create a ruby script anywhere in the folder and run it
 
 ```ruby
 # script.rb
-require 'empezar'
 
-Runner.run        # Maps config/main.yaml to Configuration as SymbolMatrix
-                  # Gets ready Log as a logger in log/main.log
+require 'empezar/run'
+# Maps config/main.yaml to Configuration as SymbolMatrix
+# Gets ready Log as a logger in log/main.log
+# Also gets $stdout setted as the output IO
+# and gets ARGV passed as arguments for the configuration to be completed
 
 Log.info "This will be logged and written in the shell"
 
@@ -33,8 +35,8 @@ end
 
 ...and then 
 
-    ruby script.rb
+    ruby script.rb speak.only:truth
 
-You can find this sample in the `sample` folder in this repo.
+You will see some output in the terminal after that.
 
 This is really short, so here, [have a picture of a monkey](http://i.dailymail.co.uk/i/pix/2011/07/04/article-2011051-0CDC0F0900000578-739_634x894.jpg) . Enjoy
