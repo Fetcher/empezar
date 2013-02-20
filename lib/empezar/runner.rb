@@ -15,8 +15,12 @@ module Empezar
     end
 
     def self.start_logger log_file, stdout
-      Dir.mkdir 'log' unless Dir.exist? 'log'
-      Empezar::Log.start Logger.new 'log/main.log', 'daily'
+      if log_file == 'log/main.log'
+        Dir.mkdir 'log' unless Dir.exist? 'log'
+        Empezar::Log.start Logger.new 'log/main.log', 'daily'
+      else 
+        Empezar::Log.start Logger.new log_file, 'daily'
+      end
       if Empezar::Configuration.instance.has_key? :verbosity and Empezar::Configuration.instance.verbosity == 'silent'
       else
         Empezar::Log.instance.formatter = EchoingFormatter.new Logger::Formatter.new, stdout
